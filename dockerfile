@@ -8,8 +8,8 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o saady .
+RUN go build -o main.app .
 
-EXPOSE 8001
+EXPOSE 8080
 
-CMD ["/app/saady"]
+CMD ["/app/main.app"]
