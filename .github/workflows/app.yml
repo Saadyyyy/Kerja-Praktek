@@ -40,8 +40,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            sudo apt docker stop restapi  
-            sudo apt docker rm restapi
-            sudo apt docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/min-project:latest
-            sudo apt docker pull ${{ secrets.DOCKERHUB_USERNAME }}/min-project:latest
-            sudo apt docker run -d -p 8001:8001 -e DBUSER=${{ secrets.DB_USERNAME }} -e DBPASS=${{ secrets.DB_PASSWORD }} -e DBHOST=${{ secrets.DB_HOST }} -e DBPORT=${{ secrets.DB_PORT }} -e DBNAME=${{ secrets.DB_NAME }} -e SECRET_JWT=${{ secrets.SECRET_KEY }} --name restapi ${{ secrets.DOCKERHUB_USERNAME }}/kp:latest
+            sudo docker stop restapi  
+            sudo docker rm restapi
+            sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/min-project:latest
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/min-project:latest
+            sudo docker run -d -p 8001:8001 -e DBUSER=${{ secrets.DB_USERNAME }} -e DBPASS=${{ secrets.DB_PASSWORD }} -e DBHOST=${{ secrets.DB_HOST }} -e DBPORT=${{ secrets.DB_PORT }} -e DBNAME=${{ secrets.DB_NAME }} -e SECRET_JWT=${{ secrets.SECRET_KEY }} --name restapi ${{ secrets.DOCKERHUB_USERNAME }}/kp:latest
