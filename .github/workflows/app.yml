@@ -1,4 +1,4 @@
-name: Deploy Apps
+name: Deploy Hotelku App
 
 on:
   push:
@@ -24,9 +24,9 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./dockerfile
+          file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/kp:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/Laode:latest
 
   deploy-rest-api:
     runs-on: ubuntu-latest
@@ -40,8 +40,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            sudo docker stop restapi  
+            sudo docker stop restapi
             sudo docker rm restapi
-            sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/kp:latest
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/kp:latest
-            sudo docker run -d -p 8001:8001 -e DBUSER=${{ secrets.DB_USERNAME }} -e DBPASS=${{ secrets.DB_PASSWORD }} -e DBHOST=${{ secrets.DB_HOST }} -e DBPORT=${{ secrets.DB_PORT }} -e DBNAME=${{ secrets.DB_NAME }} -e SECRET_JWT=${{ secrets.SECRET_KEY }} -e SMTP_SERVER=${{ secrets.SMTP_SERVER }} -e SMTP_USERNAME=${{ secrets.SMTP_USERNAME }} -e SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }} -e SMTP_PORT=${{ secrets.SMTP_PORT }}  --name restapi ${{ secrets.DOCKERHUB_USERNAME }}/kp:latest
+            sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/Laode:latest
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/Laode:latest
+            sudo docker run -d -p 8080:8080 -e CREDENTIALS=${{ secrets.CREDENTIALS }} -e DB_USERNAME=${{ secrets.DB_USERNAME }} -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} -e DB_HOST=${{ secrets.DB_HOST }} -e DB_PORT=${{ secrets.DB_PORT }} -e DB_NAME=${{ secrets.DB_NAME }} -e SECRET_KEY=${{ secrets.SECRET_KEY }} -e SMTP_SERVER=${{ secrets.SMTP_SERVER }} -e SMTP_USERNAME=${{ secrets.SMTP_USERNAME }} -e SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }} -e SMTP_PORT=${{ secrets.SMTP_PORT }} --name restapi ${{ secrets.DOCKERHUB_USERNAME }}/Laode:latest
