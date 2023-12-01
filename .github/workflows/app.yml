@@ -42,6 +42,6 @@ jobs:
           script: |
             sudo docker stop restapi  
             sudo docker rm restapi
-            sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/min-project:latest
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/min-project:latest
+            sudo docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/kp:latest
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/kp:latest
             sudo docker run -d -p 8001:8001 -e DBUSER=${{ secrets.DB_USERNAME }} -e DBPASS=${{ secrets.DB_PASSWORD }} -e DBHOST=${{ secrets.DB_HOST }} -e DBPORT=${{ secrets.DB_PORT }} -e DBNAME=${{ secrets.DB_NAME }} -e SECRET_JWT=${{ secrets.SECRET_KEY }} -e SMTP_SERVER=${{ secrets.SMTP_SERVER }} -e SMTP_USERNAME=${{ secrets.SMTP_USERNAME }} -e SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }} -e SMTP_PORT=${{ secrets.SMTP_PORT }}  --name restapi ${{ secrets.DOCKERHUB_USERNAME }}/kp:latest
