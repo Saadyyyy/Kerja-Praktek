@@ -26,7 +26,7 @@ jobs:
           context: .
           file: ./dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/min-project:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/kp:latest
 
   deploy-rest-api:
     runs-on: ubuntu-latest
