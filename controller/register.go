@@ -44,12 +44,6 @@ func SignUp(db *gorm.DB, secretKey []byte) echo.HandlerFunc {
 			return c.JSON(http.StatusBadRequest, errorResponse)
 		}
 
-		// Validasi data phone number
-		if !helper.IsValidPhoneNumber(user.PhoneNumber) {
-			errorResponse := helper.ErrorResponse{Code: http.StatusBadRequest, Message: "Invalid phone number format"}
-			return c.JSON(http.StatusBadRequest, errorResponse)
-		}
-
 		if user.Password != user.ConfirmPassword {
 			errorResponse := helper.ErrorResponse{Code: http.StatusBadRequest, Message: "Password confirmation does not match"}
 			return c.JSON(http.StatusBadRequest, errorResponse)
@@ -73,16 +67,6 @@ func SignUp(db *gorm.DB, secretKey []byte) echo.HandlerFunc {
 			return c.JSON(http.StatusConflict, errorResponse)
 		} else if !errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			errorResponse := helper.ErrorResponse{Code: http.StatusInternalServerError, Message: "Failed to check email"}
-			return c.JSON(http.StatusInternalServerError, errorResponse)
-		}
-
-		// Memeriksa apakah nomor telepon sudah ada di database
-		result = db.Where("phone_number = ?", user.PhoneNumber).First(&existingUser)
-		if result.Error == nil {
-			errorResponse := helper.ErrorResponse{Code: http.StatusConflict, Message: "Phone number already exists"}
-			return c.JSON(http.StatusConflict, errorResponse)
-		} else if !errors.Is(result.Error, gorm.ErrRecordNotFound) {
-			errorResponse := helper.ErrorResponse{Code: http.StatusInternalServerError, Message: "Failed to check phone number"}
 			return c.JSON(http.StatusInternalServerError, errorResponse)
 		}
 

@@ -6,9 +6,9 @@ import (
 
 type User struct {
 	gorm.Model
-	Username          string `json:"Username"`
-	Password          string `json:"password"`
-	PhoneNumber       string `json:"phone_number"`
+	Username string `json:"Username"`
+	Password string `json:"password"`
+	// PhoneNumber       string `json:"phone_number"`
 	Email             string `json:"email"`
 	IsVerified        bool   `gorm:"default:false" json:"is_verified"`
 	VerificationToken string `json:"verification_token"`
