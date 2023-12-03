@@ -2,7 +2,6 @@ package controller
 
 import (
 	"errors"
-	"kerja-praktek/emails"
 	help "kerja-praktek/helper"
 	"kerja-praktek/middleware"
 	"kerja-praktek/model"
@@ -69,10 +68,10 @@ func SignIn(db *gorm.DB, secretKey []byte) echo.HandlerFunc {
 		}
 
 		// Mengirim email notifikasi
-		if err := emails.SendLoginNotification(existingUser.Email, existingUser.Username); err != nil {
-			errorResponse := help.ErrorResponse{Code: http.StatusInternalServerError, Message: "Failed to send notification email"}
-			return c.JSON(http.StatusInternalServerError, errorResponse)
-		}
+		// if err := emails.SendLoginNotification(existingUser.Email, existingUser.Username); err != nil {
+		// 	errorResponse := help.ErrorResponse{Code: http.StatusInternalServerError, Message: "Failed to send notification email"}
+		// 	return c.JSON(http.StatusInternalServerError, errorResponse)
+		// }
 
 		// Menyertakan ID pengguna dalam respons
 		return c.JSON(http.StatusOK, map[string]interface{}{"code": http.StatusOK, "error": false, "message": "User login successful", "token": tokenString, "id": existingUser.ID})
