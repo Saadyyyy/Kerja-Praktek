@@ -7,7 +7,6 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"gorm.io/driver/mysql"
@@ -38,7 +37,7 @@ func InitializeDatabase(config DatabaseConfig) (*gorm.DB, error) {
 
 func SetupRouter() *echo.Echo {
 	// Inisialisasi database
-	godotenv.Load(".env")
+	// godotenv.Load(".env")
 	// if err != nil {
 	// 	log.Fatalf("Error loading .env file: %v", err)
 	// }
