@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 )
@@ -21,7 +20,7 @@ func ServeHTML(c echo.Context) error {
 
 func SetupRoutes(e *echo.Echo, db *gorm.DB) {
 	// e.Use(Logger())
-	godotenv.Load()
+	// godotenv.Load()
 	// if err != nil {
 	// 	log.Fatal("Error loading .env file")
 	// }
