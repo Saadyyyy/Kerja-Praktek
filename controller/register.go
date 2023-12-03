@@ -91,6 +91,7 @@ func SignUp(db *gorm.DB, secretKey []byte) echo.HandlerFunc {
 		user.Password = string(hashedPasswords)
 		db.Create(&user)
 		user.Password = ""
+		user.ConfirmPassword = ""
 
 		// Generate token otentikasi
 		tokenString, err := middleware.GenerateToken(user.Username, secretKey)
