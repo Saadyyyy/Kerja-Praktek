@@ -77,12 +77,19 @@ func SignUp(db *gorm.DB, secretKey []byte) echo.HandlerFunc {
 			return c.JSON(http.StatusInternalServerError, errorResponse)
 		}
 
+		hashedPasswords, err := bcrypt.GenerateFromPassword([]byte(user.ConfirmPassword), bcrypt.DefaultCost)
+		if err != nil {
+			errorResponse := helper.ErrorResponse{Code: http.StatusInternalServerError, Message: "Failed to hash password"}
+			return c.JSON(http.StatusInternalServerError, errorResponse)
+		}
+
 		// Membuat token verifikasi unik
 		uniqueToken := helper.GenerateUniqueToken()
 		user.VerificationToken = uniqueToken
 
 		// Menyimpan password yang dienkripsi ke database
 		user.Password = string(hashedPassword)
+		user.Password = string(hashedPasswords)
 		db.Create(&user)
 		user.Password = ""
 
