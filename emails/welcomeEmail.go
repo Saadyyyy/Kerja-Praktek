@@ -16,7 +16,7 @@ func SendWelcomeEmail(userEmail, name, verificationToken string) error {
 	sender := smtpUsername
 	recipient := userEmail
 	subject := "Laode Saady Website"
-	verificationLink := "https://13.210.241.0:8080/verify?token=" + verificationToken
+	verificationLink := "http://localhost:8080/verify?token=" + verificationToken
 	emailBody := `
     <html>
     <head>
