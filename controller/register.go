@@ -6,6 +6,7 @@ import (
 	"kerja-praktek/helper"
 	"kerja-praktek/middleware"
 	"kerja-praktek/model"
+	"log"
 
 	"net/http"
 	"regexp"
@@ -101,11 +102,12 @@ func SignUp(db *gorm.DB, secretKey []byte) echo.HandlerFunc {
 			return c.JSON(http.StatusInternalServerError, errorResponse)
 		}
 
-		// // Mengirim email selamat datang
-		// if err := emails.SendWelcomeEmail(user.Email, user.Username, uniqueToken); err != nil {
-		// 	errorResponse := helper.ErrorResponse{Code: http.StatusInternalServerError, Message: "Failed to send welcome email"}
-		// 	return c.JSON(http.StatusInternalServerError, errorResponse)
-		// }
+		// Mengirim email selamat datang
+		if err := emails.SendWelcomeEmail(user.Email, user.Username, uniqueToken); err != nil {
+			log.Println("Error sending welcome email:", err)
+			errorResponse := helper.ErrorResponse{Code: http.StatusInternalServerError, Message: "Failed to send welcome email"}
+			return c.JSON(http.StatusInternalServerError, errorResponse)
+		}
 
 		// Respon sukses
 		response := map[string]interface{}{
