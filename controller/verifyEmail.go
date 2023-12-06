@@ -24,7 +24,7 @@ func VerifyEmail(db *gorm.DB) echo.HandlerFunc {
 		db.Save(&user)
 
 		// Baca template HTML dari file
-		tmpl, err := template.ParseFiles("emails/verification.html")
+		tmpl, err := template.ParseFiles("emails/email.html")
 		if err != nil {
 			return c.String(http.StatusInternalServerError, "Internal Server Error")
 		}
