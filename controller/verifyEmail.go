@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"html/template"
+	"html/template" // Import pustaka template HTML
 	"kerja-praktek/model"
 	"net/http"
 
@@ -24,7 +24,7 @@ func VerifyEmail(db *gorm.DB) echo.HandlerFunc {
 		db.Save(&user)
 
 		// Baca template HTML dari file
-		tmpl, err := template.ParseFiles("emails/email.html")
+		tmpl, err := template.ParseFiles("helper/verification.html")
 		if err != nil {
 			return c.String(http.StatusInternalServerError, "Internal Server Error")
 		}
