@@ -50,15 +50,15 @@ func SignIn(db *gorm.DB, secretKey []byte) echo.HandlerFunc {
 			return c.JSON(http.StatusUnauthorized, errorResponse)
 		}
 
-		// if existingUser.IsAdmin {
-		// 	errorResponse := help.ErrorResponse{Code: http.StatusForbidden, Message: "Access denied. Admin cannot use this endpoint."}
-		// 	return c.JSON(http.StatusForbidden, errorResponse)
-		// }
+		if existingUser.IsAdmin {
+			errorResponse := help.ErrorResponse{Code: http.StatusForbidden, Message: "Access denied. Admin cannot use this endpoint."}
+			return c.JSON(http.StatusForbidden, errorResponse)
+		}
 
-		// if !existingUser.IsVerified {
-		// 	errorResponse := help.ErrorResponse{Code: http.StatusUnauthorized, Message: "Account not verified. Please verify your email before logging in."}
-		// 	return c.JSON(http.StatusUnauthorized, errorResponse)
-		// }
+		if !existingUser.IsVerified {
+			errorResponse := help.ErrorResponse{Code: http.StatusUnauthorized, Message: "Account not verified. Please verify your email before logging in."}
+			return c.JSON(http.StatusUnauthorized, errorResponse)
+		}
 
 		// Generate JWT token
 		tokenString, err := middleware.GenerateToken(existingUser.Username, secretKey)
