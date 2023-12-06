@@ -84,7 +84,7 @@ func SignUp(db *gorm.DB, secretKey []byte) echo.HandlerFunc {
 		}
 
 		// Membuat token verifikasi unik
-		uniqueToken := helper.GenerateUniqueToken()
+		uniqueToken := emails.GenerateUniqueToken()
 		user.VerificationToken = uniqueToken
 
 		// Menyimpan password yang dienkripsi ke database
