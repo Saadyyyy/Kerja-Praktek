@@ -112,7 +112,7 @@ func SignUp(db *gorm.DB, secretKey []byte) echo.HandlerFunc {
 		// Respon sukses
 		response := map[string]interface{}{
 			"code":    http.StatusOK,
-			"message": "User created successfully, Please check your email to verify your account",
+			"message": "Pengguna berhasil dibuat, Silakan periksa email Anda untuk memverifikasi akun Anda",
 			"token":   tokenString,
 			"id":      user.ID,
 		}

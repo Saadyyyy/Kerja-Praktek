@@ -16,7 +16,7 @@ func SendWelcomeEmail(userEmail, name, verificationToken string) error {
 	sender := smtpUsername
 	recipient := userEmail
 	subject := "Laode Saady Website"
-	verificationLink := "https://13.210.241.0:8080/verify?token=" + verificationToken
+	verificationLink := "http://localhost:8080/verify?token=" + verificationToken
 	emailBody := `
     <html>
     <head>
@@ -85,7 +85,7 @@ h1 {
     </head>
     <body>
         <div class="container">
-            <h1>Website Pendaftaran SMAN 1 Bunguran Barat</h1>
+            <h1>Website Laode saadyy</h1>
             <div class="message">
                 <p>Hello, <strong>` + name + `</strong>,</p>
                 <p>Terimakasih sudah register di website ini. Silahkan tekan tombol verify email untuk melanjutkan pendaftaran</p>
@@ -93,7 +93,7 @@ h1 {
                 <a href="` + verificationLink + `" class="btn btn-verify-email">Verify Email</a>
             </div>
             <div class="footer">
-                <p>&copy; 2023 laode saady. All rights reserved.</p>
+                <p>&copy; 2024 laode saady. All rights reserved.</p>
             </div>
         </div>
     </body>

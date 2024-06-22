@@ -57,7 +57,7 @@ func SignIn(db *gorm.DB, secretKey []byte) echo.HandlerFunc {
 		}
 
 		if !existingUser.IsVerified {
-			errorResponse := help.ErrorResponse{Code: http.StatusUnauthorized, Message: "Account not verified. Please verify your email before logging in."}
+			errorResponse := help.ErrorResponse{Code: http.StatusUnauthorized, Message: "Akun tidak terverifikasi. Harap verifikasi email Anda sebelum login."}
 			return c.JSON(http.StatusUnauthorized, errorResponse)
 		}
 
